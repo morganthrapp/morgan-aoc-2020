@@ -1,0 +1,1 @@
+print(sum([1 for line in map(lambda x: x.strip('\n'), open('input')) if __import__('re').match(__import__('re').sub('(\d+)-(\d+) (\w): (\w+)', '^\g<3>{\g<1>,\g<2>}$', line), __import__('re').sub(__import__('re').sub('.* (\w):.*', '[^\g<1>]', line), '', line.rpartition(' ')[2]))]))
