@@ -1,0 +1,1 @@
+print( [a*b for a, b in __import__('itertools').combinations(map(int, open('input', 'r')), 2) if a+b==2020], [a*b*c for a, b, c in __import__('itertools').combinations(map(int, open('input', 'r')), 3) if a+b+c==2020])
