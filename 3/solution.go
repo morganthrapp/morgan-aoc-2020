@@ -12,11 +12,6 @@ func check(e error) {
 	}
 }
 
-func must(i int, e error) int {
-	check(e)
-	return i
-}
-
 func main() {
 	rawData, err := ioutil.ReadFile("input")
 	check(err)
@@ -35,7 +30,7 @@ func countTrees(values []string, xMovement int, yMovement int) int {
 	yLoc := 0
 	treeCount := 0
 	lineLength := len(values[yLoc])
-	for yLoc < len(values) - yMovement {
+	for yLoc < len(values)-yMovement {
 		yLoc = yLoc + yMovement
 		xLoc = (xLoc + xMovement) % lineLength
 		if string(values[yLoc][xLoc]) == "#" {
@@ -46,7 +41,7 @@ func countTrees(values []string, xMovement int, yMovement int) int {
 }
 
 func problemTwo(values []string) int {
-	curves := [][]int{ {1,1}, {3,1}, {5,1}, {7,1}, {1,2} }
+	curves := [][]int{{1, 1}, {3, 1}, {5, 1}, {7, 1}, {1, 2}}
 	total := 1
 	for _, c := range curves {
 		x := c[0]
