@@ -121,7 +121,7 @@ func problemOne(context Context) int {
 func problemTwo(context Context) int {
 	brokenContext := context
 	instruction := brokenContext.next()
-	for instruction.runCount < 2{
+	for brokenContext.instructionPointer < len(brokenContext.instructions) {
 		newContext := instruction.run(brokenContext)
 		if newContext.instructionPointer >= len(newContext.instructions) {
 			return newContext.accumulator
@@ -129,13 +129,15 @@ func problemTwo(context Context) int {
 		instruction.runCount++
 		brokenContext.instructions[brokenContext.instructionPointer] = instruction
 		instruction = newContext.next()
-		if instruction.runCount > 0 {
+		if instruction.runCount > 1 {
 			brokenInstructionAddress := brokenContext.instructionPointer
 			brokenInstruction := brokenContext.next()
 			if brokenInstruction.instructionType == "jmp" {
 				context.instructions[brokenInstructionAddress] = buildNoop(brokenInstruction.argument)
-			} else {
+				break
+			} else if brokenInstruction.instructionType == "nop" {
 				context.instructions[brokenInstructionAddress] = buildJump(brokenInstruction.argument)
+				break
 			}
 		}
 		brokenContext = newContext
